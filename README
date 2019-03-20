@@ -1,0 +1,21 @@
+### 提交代码
+   首先本地需要生成change-id，首次提交需要执行一次，请将wanghui14替换成自己的账号
+   gitdir=$(git rev-parse --git-dir); scp -p -P 29418 wanghui14@athena.devops.letv.com:hooks/commit-msg ${gitdir}/hooks/
+
+   推送代码，因为没有repo命令，所以git commit提交代码后，需要用git push把提交推送到gerrit服务器上
+   git push origin HEAD:refs/for/master
+
+###工程结构
+  存在三个module：app(demo)、qrcodelib(qrcode sdk)、zxing(谷歌二维码开源库)
+  app依赖qrcodelib
+  qrcode依赖zxing
+
+###发版方法
+  1. 修改qrcodelib/build.gradle版本号
+  2. 执行 ./gradlew makeLibJar，打包qrcodesdk到build/libs目录
+  3. 修改wiki http://wiki.letv.cn/pages/viewpage.action?pageId=66931164
+
+###zxing版本升级
+  1. 到https://jcenter.bintray.com/com/google/zxing/core查看是否有更新
+  2. 删除zxing/src/main/java下的java文件，解压core-xxx-sources.jar到该目录
+  3. 使用java1.6改写，并且执行 ./gradlew makeZxingJar，打包zxing到build/libs目录

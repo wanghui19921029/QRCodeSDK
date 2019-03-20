@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QRCodeSDK</string>
+
+    <string name="test_url">http://www.le.com</string>
+    <string name="encode">点击生成二维码</string>
+    <string name="decode">点击解析二维码</string>
+
+</resources>
